@@ -10,7 +10,7 @@ class AuthorRepository:
         return author
 
     def get_all_authors(self, query=None):
-        authors = Author.objects.filter(is_deleted=False)
+        authors = Author.objects.filter(is_deleted=False).order_by('author_id')
         if query:
             authors = authors.filter(Q(name__icontains=query) )
         return authors

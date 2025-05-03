@@ -14,7 +14,7 @@ class BookResponse(serializers.ModelSerializer):
         fields = ['book_id', 'title', 'author_id', 'genre','author_name','isbn','quantity']
 
 class BookSerializer(serializers.ModelSerializer):
-    
+    #author_id = serializers.IntegerField(source="author.author_id")
     class Meta:
         model = Book
-        fields = [ 'title', 'genre', 'author','isbn']
+        fields = [ 'title', 'author', 'genre','isbn']

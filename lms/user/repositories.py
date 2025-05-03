@@ -2,14 +2,15 @@ from .models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import check_password, make_password
 
+
 class UserRepository:
      def create_user(self, user_data):
         # Ensure user_data is a dictionary before modifying it
         user_data["password"] = make_password(user_data["password"])
-        
+
         # Create and return the user
         return User.objects.create(**user_data)
-     
+
      def authenticate_user(self, username, password):
         try:
             # Fetch user by username and check if not deleted
@@ -20,9 +21,9 @@ class UserRepository:
                 return user
         except User.DoesNotExist:
             return None
-        
+
         return None
-     
+
      def get_user(self, username):
         try:
             # Fetch user by username and check if not deleted
@@ -30,3 +31,7 @@ class UserRepository:
             return user
         except User.DoesNotExist:
             return None
+
+     def get_all_users(self):
+        # Fetch all users who are not deleted
+        return User.objects.filter(is_deleted=False)

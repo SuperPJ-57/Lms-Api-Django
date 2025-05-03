@@ -30,8 +30,12 @@ class TransactionService:
         transaction_data['bookcopy'] = book_copy
         transaction_data['status'] = 'Active'
         transaction_data['transaction_type'] = 'Borrow'
-        transaction_data['date'] = timezone.now().date()
+        if transaction_data['date'] is None or transaction_data['date'] == '':
+            transaction_data['date'] = timezone.now().date()
+        else:
+            transaction_data['date'] = transaction_data['date']
         transaction_data['due_date'] = (timezone.now() + timezone.timedelta(days=14)).date()  # Set due date (e.g., 14 days)
+
         transaction = self.repo.create_transaction(transaction_data)
 
         # Update book copy status

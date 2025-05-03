@@ -62,5 +62,8 @@ class DashboardRepository:
                     book = transaction.book
                 )
                 overdue_borrowers.append(overdue_borrower)
+                # Update the transaction status to 'Overdue'
+                transaction.status = 'Overdue'
+                transaction.save()
 
         return overdue_borrowers

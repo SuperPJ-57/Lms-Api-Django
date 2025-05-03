@@ -24,3 +24,7 @@ class UserService:
     def get_user(self, username):
         user = self.repo.get_user(username)
         return user
+    
+    def get_all_users(self):
+        users = self.repo.get_all_users()
+        return users

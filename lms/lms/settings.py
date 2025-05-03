@@ -53,9 +53,7 @@ INSTALLED_APPS = [
     'corsheaders',
 ]   
 #CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # React app's development server
-]
+
 
 SIMPLE_JWT = {
     "USER_ID_FIELD": "userId",  # The custom userId field
@@ -120,6 +118,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+     "http://localhost:3000" 
+        # React app's development server
+]
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
@@ -127,15 +131,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "backup.acc2059@gmail.com"
 EMAIL_HOST_PASSWORD = "nkff vvxf vdii erow"
 DEFAULT_FROM_EMAIL =  "backup.acc2059@gmail.com"
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+
 
 
 ROOT_URLCONF = 'lms.urls'

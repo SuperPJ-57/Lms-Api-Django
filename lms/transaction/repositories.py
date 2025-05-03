@@ -1,5 +1,6 @@
 from django.db import transaction
 from .models import Transaction
+from django.db.models import Q
 
 class TransactionRepository:
 
@@ -21,9 +22,23 @@ class TransactionRepository:
         """Retrieves all transactions for a specific student."""
         return Transaction.objects.filter(student_id=student_id)
 
-    def get_all_transactions(self):
+    def get_all_transactions(self,query=None,completed=None):
         """Retrieves all transactions."""
-        return Transaction.objects.all()
+        transactions = Transaction.objects.all() if completed else Transaction.objects.filter(status__in=['Active', 'Overdue'])
+        if query:
+            transactions = transactions.filter(
+                Q(transaction_id__icontains=query) |
+                Q(book__isbn__icontains=query) |
+                Q(bookcopy__barcode__icontains=query) | 
+                Q(student__name__icontains=query) |
+                Q(transaction_type__icontains=query) |
+                Q(status__icontains=query) |
+                Q(date__icontains=query) |
+                Q(due_date__icontains=query) |
+                Q(book__title__icontains=query) |
+                Q(user__user_name__icontains=query)             
+            )
+        return transactions
 
     @transaction.atomic
     def delete_transaction(self, transaction_id):

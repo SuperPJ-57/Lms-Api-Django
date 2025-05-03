@@ -12,7 +12,7 @@ class TransactionResponse(serializers.ModelSerializer):
     borrower_name = serializers.CharField(source='student.name')
     book_id = serializers.IntegerField(source='book.book_id')
     book_title = serializers.CharField(source='book.title')
-    
+    #user_id = serializers.IntegerField(source='user.userId')
     class Meta:
         model = Transaction
-        fields = ['transaction_id', 'student_id', 'borrower_name','book_id','book_title','barcode','transaction_type','status','date','due_date']
+        fields = ['transaction_id', 'student_id', 'borrower_name','book_id','book_title','barcode','transaction_type','status','date','due_date','user']
